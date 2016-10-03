@@ -1,6 +1,6 @@
 ## Description
 
-Create a simple content management system that allows users to add, delete, or update books.  Books entered in the system can be viewed in a listing, or searched for using basic searches (title, author, genre). 
+Create a simple content management system that allows users to add, delete, or update books.  Books entered in the system can be viewed in a listing, or searched for using basic searches (title, author, genre).
 
 ## Context
 
@@ -13,7 +13,6 @@ Creating this web application will provide exposure to:
 ## Specifications
 
 - [ ] Any user can add books into the system via an admin page
-- [ ] Books entered in the system are listed on the home page, in pages of 10
 - [ ] Users can search for books by title OR by author OR by genre, and search results will be presented in a new page
 - [ ] Users can view book details on a book detail page, linked to from the listing or search pages
 - [ ] Store books in Postgres database

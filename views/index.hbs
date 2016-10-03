@@ -1,2 +1,9 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="books">
+  <ul>
+    {{#each books}}
+      <li>{{title}}</li>
+      <li>{{description}}</li>
+      <li><img src="{{img_url}}" width="100px" height="100px" /></li>
+    {{/each}}
+  </ul>
+</div>

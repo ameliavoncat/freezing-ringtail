@@ -1,5 +1,44 @@
+a, a:hover,a:visited{
+  color:black !important;
+
+}
+.book-row{
+}
+
+.main-color{
+background-color:#4E9E74;
+
+}
+.box-color{
+  background-color:#EB8B91;
+  background-color:#FFB0B5;
+  background-color:#B8AC9C;
+
+}
+.book{
+  margin:0.1em;
+  height:20em;
+}
+.book:hover{
+  background-color:#B8A79C;
+}
+
+#header{
+  text-align:center;
+  padding-top:0.5em;
+  padding-bottom:0.5em;
+
+}
+#books{
+  margin-top:0.5em;
+}
+.padding{
+}
+
 body {
-  padding: 50px;
+  margin-left:6%;
+  margin-right:6%;
+  background-color:#DFEBE2;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 

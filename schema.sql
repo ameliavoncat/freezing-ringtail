@@ -45,3 +45,17 @@ CREATE TABLE book_authors
   book_id INTEGER NOT NULL,
   author_id INTEGER NOT NULL
 );
+
+DROP TABLE IF EXISTS publicators;
+CREATE TABLE publicators
+(
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+)
+
+DROP TABLE IF EXISTS book_publicators
+CREATE TABLE book_publicators
+(
+  book_id INTEGER NOT NULL,
+  publicator_id INTEGER NOT NULL
+)

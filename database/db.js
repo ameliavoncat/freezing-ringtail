@@ -14,7 +14,7 @@ const getBookById = 'SELECT * FROM books WHERE id=$1'
 const queryBooks = 'SELECT * FROM books WHERE $1 = $2'
 
 const getAuthors = 'SELECT * FROM authors'
-const queryAuthors = 'SELECT * FROM authors WHERE $1 = $2'
+const queryAuthors = 'SELECT * FROM authors WHERE id = $1'
 
 const getGenres = 'SELECT * FROM genres'
 
@@ -40,7 +40,7 @@ Book = {
 
 Author = {
   getAuthors: () => db.any( getAuthors ),
-  queryAuthors: ( column, option ) => db.one( getAuthorById, [ column, option ] )
+  queryAuthors: ( option ) => db.one( queryAuthors, [ option ] )
 }
 
 Genre = {

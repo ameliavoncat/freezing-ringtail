@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Book } = require('../database/db.js');
+const { Author } = require( '../database/db.js' )
 
 /* GET home page. */
 router.get('/', ( request, response ) => {
@@ -16,6 +17,7 @@ router.get('/', ( request, response ) => {
     .then( books => response.render( 'index', { books, page, size } ) )
 });
 
+/* GET book details page. */
 router.get('/book/:book_id', ( request, response ) => {
   const { book_id } = request.params
 
@@ -25,6 +27,18 @@ router.get('/book/:book_id', ( request, response ) => {
     })
     .catch( error => { message: error.message } )
 });
+
+/* GET author details page. */
+router.get('/author/:author_id', ( request, response ) => {
+  const { author_id } = request.params
+
+  Author.queryAuthors( author_id )
+  .then( author => {
+    response.render( 'author-detail', { author } )
+  })
+});
+
+
 
 
 module.exports = router;

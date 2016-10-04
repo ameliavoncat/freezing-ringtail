@@ -9,8 +9,9 @@ CREATE TABLE books
   id SERIAL PRIMARY KEY,
   author VARCHAR(255) NOT NULL,
   title VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL,
+  description TEXT,
   year INTEGER,
+  publisher VARCHAR(255),
   img_url VARCHAR(255) NOT NULL DEFAULT ''
 );
 
@@ -36,7 +37,7 @@ CREATE TABLE authors
 (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  bio TEXT NOT NULL,
+  bio TEXT,
   img_url VARCHAR(255) NOT NULL DEFAULT ''
 );
 
@@ -47,15 +48,15 @@ CREATE TABLE book_authors
   author_id INTEGER NOT NULL
 );
 
-DROP TABLE IF EXISTS publicators;
-CREATE TABLE publicators
+DROP TABLE IF EXISTS publishers;
+CREATE TABLE publishers
 (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL
 );
 
-DROP TABLE IF EXISTS book_publicators;
-CREATE TABLE book_publicators
+DROP TABLE IF EXISTS book_publishers;
+CREATE TABLE book_publishers
 (
   book_id INTEGER NOT NULL,
   publicator_id INTEGER NOT NULL

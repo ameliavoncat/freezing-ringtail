@@ -27,6 +27,13 @@ const pageOffset=function(page){
   return (page-1)*pageSize;
 }
 
+Count = {
+  countAuthors: () => db.any( countAuthors ),
+  countBooks: () => db.any( countBooks ),
+  countGenres: () => db.any( countGenres ),
+  countPublishers: () => db.any( countPublishers )
+}
+
 Book = {
   getAll: page => db.any( getAllBooks,[pageSize, pageOffset] ),
   getBookById: book_id => db.one( getBookById, [ book_id ] ),
@@ -44,7 +51,6 @@ Genre = {
 
 Publicator = {
   getPublishers: () => db.any( getPublishers )
-  getOne: book_id => db.one( getOneBook, [ book_id ] )
 }
 
 module.exports = { Count, Book, Author, Genre, Publicator }

@@ -6,7 +6,7 @@ const db = pgp( connectionString );
 const faker = require( 'faker' )
 
 const fakeBook = book => {
-  const sql = 'INSERT INTO books( title, author, description, img_url ) VALUES ( $1, $2, $3, $4 )'
+  const sql = 'INSERT INTO books( title, author, description, year, img_url ) VALUES ( $1, $2, $3, $4, $5 )'
   db.none( sql, [ book.title, book.author, book.description, book.year, book.img_url ] )
 }
 

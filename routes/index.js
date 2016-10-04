@@ -11,7 +11,7 @@ router.get('/', ( request, response ) => {
 router.get('/book/:book_id', ( request, response ) => {
   const { book_id } = request.params
 
-  Book.getOne( book_id )
+  Book.getBookById( book_id )
     .then( book => {
 
       response.render( 'book_details', { book }  )

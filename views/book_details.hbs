@@ -1,6 +1,25 @@
-<div>
-<h1>{{book.title}}</h1>
-<p>
-  {{book.description}}
-</p>
+<div id="header"><h1>{{book.title}}</h1></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <img src={{book.img_url}} class="col-xs-4"></img>
+    <div class="details col-xs-8">
+      <div class="row">
+        <div class="col-xs-4 author-label"><h2>Author:</h2></div>
+        <div class="col-xs-8 author-name"><h2>{{book.author}}</h2></div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 publisher-label"><h2>Publisher:</h2></div>
+        <div class="col-xs-8 publisher-name"><h2>{{book.publisher}}</h2></div>
+      </div>
+    </div>
+  </div>
+  <div id="summary-row" class="row">
+
+    <div class="summary col-xs-12">
+      <h2>Book Summary</h2>
+      <p>{{book.description}}</p>
+
+    </div>
+</div>
 </div>

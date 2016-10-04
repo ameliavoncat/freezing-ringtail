@@ -31,7 +31,7 @@ const generate = () => {
       title: faker.commerce.product(),
       author: faker.commerce.product(),
       description: faker.lorem.paragraph(),
-      year: Math.floor( Math.random() * 1000 )
+      year: Math.floor( Math.random() * 1000 ),
       img_url: faker.image.people()
     })
   }

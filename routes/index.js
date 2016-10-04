@@ -5,7 +5,15 @@ const { Book } = require('../database/db.js');
 /* GET home page. */
 router.get('/', ( request, response ) => {
 
-  Book.getAll().then( books => response.render('index', { books }))
+  const { query } = request
+
+  let page = query.page || 1
+  const size = query.size || 8
+
+  page = parseInt( page ) + 1
+
+  Book.getAll( size, page )
+    .then( books => response.render( 'index', { books, page, size } ) )
 });
 
 router.get('/book/:book_id', ( request, response ) => {

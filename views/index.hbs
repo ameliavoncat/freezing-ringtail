@@ -1,10 +1,10 @@
 <div id="header" class="main-color"><h1>Library App</h1></div>
 <div id="books-container" class="container-fluid">
 <div id="books" class="row">
-  <div class="padding col-xs-1"></div>
+  <!-- <div class="padding col-xs-1"></div> -->
     {{#each books}}
       <a href="/book/{{id}}">
-        <div class="book col-xs-2 box-color">
+        <div class="book col-xs-3 box-color">
           <div class="row book-row">
             <div class="book-title col-xs-12">{{title}}</div>
             <div class='col-xs-8 padding'></div>
@@ -17,6 +17,12 @@
         </div>
       </a>
     {{/each}}
-      <div class="padding col-xs-1"></div>
+      <!-- <div class="padding col-xs-1"></div> -->
 </div>
 </div>
+
+<div id="footer" class="container-fluid main-color">
+
+<button class="col-xs-2"></button>
+  <h1 class="col-xs-8">Page:{{page}}</h1>
+<button class="col-xs-2"></button></div>

@@ -16,7 +16,8 @@ background-color:#4E9E74;
 
 }
 .book{
-  margin:0.1em;
+  margin:1%;
+  width:23%;
   height:20em;
 }
 .book:hover{
@@ -30,18 +31,22 @@ background-color:#4E9E74;
 
 }
 #books{
-  margin-top:0.5em;
+  margin-top:0.25em;
+  margin-bottom:0.25em;
 }
 .padding{
 }
 
 body {
-  margin-left:6%;
-  margin-right:6%;
+  /*margin-left:6%;
+  margin-right:6%;*/
   background-color:#DFEBE2;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+#footer{
+  text-align:center;
 }

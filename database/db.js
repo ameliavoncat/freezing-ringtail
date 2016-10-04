@@ -47,4 +47,4 @@ Publicator = {
   getOne: book_id => db.one( getOneBook, [ book_id ] )
 }
 
-module.exports = { Book }
+module.exports = { Count, Book, Author, Genre, Publicator }

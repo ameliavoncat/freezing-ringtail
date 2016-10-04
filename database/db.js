@@ -6,7 +6,7 @@ const db = pgp( connectionString );
 const getAllBooks = 'SELECT * FROM books LIMIT $1 OFFSET $2'
 const getOneBook = 'SELECT * FROM books WHERE id=$1'
 
-const pageSize=5
+const pageSize=8
 const pageOffset=function(page){
   page=page||1;
   return (page-1)*pageSize;

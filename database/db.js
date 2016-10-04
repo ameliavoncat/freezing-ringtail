@@ -20,12 +20,7 @@ const getGenres = 'SELECT * FROM genres'
 
 const getPublishers = 'SELECT * FROM publishers'
 
-
-const pageSize=8
-const pageOffset=function(page){
-  page=page||1;
-  return (page-1)*pageSize;
-}
+// -----------------------------------------------
 
 Count = {
   countAuthors: () => db.any( countAuthors ),
@@ -35,7 +30,10 @@ Count = {
 }
 
 Book = {
-  getAll: page => db.any( getAllBooks,[pageSize, pageOffset] ),
+  getAll: ( size, page ) => {
+
+    return db.any( getAllBooks, [ size, page ] )
+  },
   getBookById: book_id => db.one( getBookById, [ book_id ] ),
   queryBooks: ( column, option ) => db.any( queryBooks, [ column, option ] )
 }

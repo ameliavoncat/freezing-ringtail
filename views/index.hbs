@@ -1,9 +1,12 @@
-<div class="books">
-  <ul>
+<div id="header">Library App</div>
+<div id="books">
     {{#each books}}
-      <li>{{title}}</li>
-      <li>{{description}}</li>
-      <li><img src="{{img_url}}" width="100px" height="100px" /></li>
+      <a href="/book/{{id}}">
+        <div class="book">
+          <div class="book-title">{{title}}, {{author}}</div>
+          <img class="book-image" src="{{img_url}}" width="100px" height="100px" />
+          <div class="book-description">{{description}}</div>
+        </div>
+      </a>
     {{/each}}
-  </ul>
 </div>

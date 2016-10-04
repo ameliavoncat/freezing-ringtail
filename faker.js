@@ -7,7 +7,7 @@ const faker = require( 'faker' )
 
 const fakeBook = book => {
   const sql = 'INSERT INTO books( title, author, description, img_url ) VALUES ( $1, $2, $3, $4 )'
-  db.none( sql, [ book.title, book.author, book.description, book.img_url ] )
+  db.none( sql, [ book.title, book.author, book.description, book.year, book.img_url ] )
 }
 
 const fakeAuthor = author => {
@@ -31,6 +31,7 @@ const generate = () => {
       title: faker.commerce.product(),
       author: faker.commerce.product(),
       description: faker.lorem.paragraph(),
+      year: Math.floor( Math.random() * 1000 )
       img_url: faker.image.people()
     })
   }

@@ -10,6 +10,7 @@ CREATE TABLE books
   author VARCHAR(255) NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
+  year INTEGER,
   img_url VARCHAR(255) NOT NULL DEFAULT ''
 );
 
@@ -51,11 +52,11 @@ CREATE TABLE publicators
 (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL
-)
+);
 
-DROP TABLE IF EXISTS book_publicators
+DROP TABLE IF EXISTS book_publicators;
 CREATE TABLE book_publicators
 (
   book_id INTEGER NOT NULL,
   publicator_id INTEGER NOT NULL
-)
+);

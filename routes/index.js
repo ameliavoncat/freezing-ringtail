@@ -16,7 +16,7 @@ router.get('/', ( request, response ) => {
   let pageBack = query.page || 1
   const sizeBack = query.size || 8
 
-  pageBack = parseInt( pageBack ) +- 1
+  pageBack = parseInt( pageBack ) - 1
 
   Book.getAll( size, page )
     .then( books => response.render( 'index', { books, page, size } ) )
@@ -28,8 +28,6 @@ router.get('/book/:book_id', ( request, response ) => {
   Promise.all([ Book.getBookById( book_id ), Book.getAuthors( book_id ), Book.getGenres( book_id) ])
     .then( data => {
       const [ book, authors, genres ] = data
-
-      console.log('Data', data);
 
 
       response.render( 'book_details', { book, authors, genres }  )

@@ -12,6 +12,12 @@ router.get('/', ( request, response ) => {
 
   page = parseInt( page ) + 1
 
+
+  let pageBack = query.page || 1
+  const sizeBack = query.size || 8
+
+  pageBack = parseInt( pageBack ) +- 1
+
   Book.getAll( size, page )
     .then( books => response.render( 'index', { books, page, size } ) )
 });

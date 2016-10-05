@@ -8,11 +8,11 @@ CREATE TABLE books
 (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  subtitle TEXT NOT NULL,
+  subtitle TEXT NOT NULL DEFAULT '',
   image_url VARCHAR(255) NOT NULL DEFAULT '',
   description TEXT NOT NULL,
   page_count INTEGER NOT NULL,
-  published_at TEXT NOT NULL
+  published_at TEXT NOT NULL DEFAULT ''
 );
 
 DROP TABLE IF EXISTS genres;
@@ -38,7 +38,7 @@ CREATE TABLE authors
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   bio TEXT NOT NULL DEFAULT '',
-  img_url VARCHAR(255) NOT NULL DEFAULT ''
+  image_url VARCHAR(255) NOT NULL DEFAULT ''
 );
 
 DROP TABLE IF EXISTS book_authors;

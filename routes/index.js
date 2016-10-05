@@ -37,8 +37,8 @@ router.get( '/author/create', ( request, response ) => {
 /* POST new author data. */
 router.post( '/author/create', ( request, response ) => {
    const { name, bio } = request.body
-
-   Author.create( { name, bio } )
+console.log (name, bio)
+   Author.create(  name, bio  )
     .then( author => {
       response.redirect( '/author/' + author.id )
     })

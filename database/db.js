@@ -14,7 +14,7 @@ const getBookById = 'SELECT * FROM books WHERE id=$1'
 const queryBooks = 'SELECT * FROM books WHERE $1 = $2'
 
 const getAuthors = 'SELECT * FROM authors'
-const queryAuthors = 'SELECT * FROM authors WHERE $1 = $2'
+const getAuthorById = 'SELECT * FROM authors WHERE id = $1'
 
 const getGenres = 'SELECT * FROM genres'
 
@@ -45,7 +45,15 @@ const getGenreByBookId = `
   LIMIT
     1
 `;
-
+const createAuthor = `
+INSERT
+INTO
+  authors(name, bio)
+VALUES
+  ($1, $2)
+RETURNING
+  id
+`;
 // -----------------------------------------------
 
 Count = {
@@ -62,13 +70,14 @@ Book = {
   },
   getBookById: book_id => db.one( getBookById, [ book_id ] ),
   getAuthors: book_id => db.any( getAuthorByBookId, [ book_id ] ),
-  getGenres: book_id => db.any( getGenreByBookId, [book_id]),
+  getGenres: book_id => db.any( getGenreByBookId, [ book_id ]),
   queryBooks: ( column, option ) => db.any( queryBooks, [ column, option ] )
 }
 
 Author = {
   getAuthors: () => db.any( getAuthors ),
-  queryAuthors: ( column, option ) => db.one( getAuthorById, [ column, option ] )
+  getOne: (author_id) => db.one( getAuthorById, [ author_id ]),
+  create: ( name, bio ) => db.one( createAuthor, [ name, bio ] )
 }
 
 Genre = {

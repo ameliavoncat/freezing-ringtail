@@ -10,6 +10,7 @@ router.get('/', ( request, response ) => {
   let page = query.page || 1
   const size = query.size || 8
 
+
   page = parseInt( page ) + 1
 
 

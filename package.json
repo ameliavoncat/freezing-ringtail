@@ -5,6 +5,9 @@
   "scripts": {
     "start": "nodemon ./bin/www"
   },
+  "devDependencies": {
+    "dotenv": "^2.0.0"
+  },
   "dependencies": {
     "body-parser": "~1.15.1",
     "bootstrap": "^3.3.7",
@@ -15,6 +18,12 @@
     "hbs": "~4.0.0",
     "morgan": "~1.7.0",
     "pg-promise": "^5.3.4",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "csv-write-stream": "^2.0.0",
+    "knex": "^0.11.10",
+    "pg": "^6.1.0",
+    "rel": "0.0.3",
+    "request": "^2.74.0",
+    "request-promise": "^4.1.1"
   }
 }

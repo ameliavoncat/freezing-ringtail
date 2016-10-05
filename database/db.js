@@ -31,6 +31,20 @@ const getAuthorByBookId =   `
   WHERE
     book_authors.book_id=$1
   `;
+const getGenreByBookId = `
+  SELECT
+    *
+  FROM
+    genres
+  JOIN
+    book_genres
+  ON
+    genres.id = book_genres.genre_id
+  WHERE
+    book_genres.book_id=$1
+  LIMIT
+    1
+`;
 
 // -----------------------------------------------
 
@@ -48,6 +62,7 @@ Book = {
   },
   getBookById: book_id => db.one( getBookById, [ book_id ] ),
   getAuthors: book_id => db.any( getAuthorByBookId, [ book_id ] ),
+  getGenres: book_id => db.any( getGenreByBookId, [book_id]),
   queryBooks: ( column, option ) => db.any( queryBooks, [ column, option ] )
 }
 

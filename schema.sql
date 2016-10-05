@@ -7,11 +7,12 @@ DROP TABLE IF EXISTS books;
 CREATE TABLE books
 (
   id SERIAL PRIMARY KEY,
-  author VARCHAR(255) NOT NULL,
   title VARCHAR(255) NOT NULL,
+  subtitle TEXT NOT NULL,
+  image_url VARCHAR(255) NOT NULL DEFAULT '',
   description TEXT NOT NULL,
-  year INTEGER,
-  img_url VARCHAR(255) NOT NULL DEFAULT ''
+  page_count INTEGER NOT NULL,
+  published_at TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS genres;
@@ -19,7 +20,7 @@ DROP TABLE IF EXISTS genres;
 CREATE TABLE genres
 (
   id SERIAL PRIMARY KEY,
-  title VARCHAR(255) NOT NULL
+  name VARCHAR(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS book_genres;
@@ -36,7 +37,7 @@ CREATE TABLE authors
 (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  bio TEXT NOT NULL,
+  bio TEXT NOT NULL DEFAULT '',
   img_url VARCHAR(255) NOT NULL DEFAULT ''
 );
 
@@ -45,18 +46,4 @@ CREATE TABLE book_authors
 (
   book_id INTEGER NOT NULL,
   author_id INTEGER NOT NULL
-);
-
-DROP TABLE IF EXISTS publicators;
-CREATE TABLE publicators
-(
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL
-);
-
-DROP TABLE IF EXISTS book_publicators;
-CREATE TABLE book_publicators
-(
-  book_id INTEGER NOT NULL,
-  publicator_id INTEGER NOT NULL
 );

@@ -19,6 +19,18 @@ const queryAuthors = 'SELECT * FROM authors WHERE $1 = $2'
 const getGenres = 'SELECT * FROM genres'
 
 const getPublishers = 'SELECT * FROM publishers'
+const getAuthorByBookId =   `
+  SELECT
+    *
+  FROM
+    authors
+  JOIN
+    book_authors
+  ON
+    authors.id = book_authors.author_id
+  WHERE
+    book_authors.book_id=$1
+  `;
 
 // -----------------------------------------------
 
@@ -35,6 +47,7 @@ Book = {
     return db.any( getAllBooks, [ size, page ] )
   },
   getBookById: book_id => db.one( getBookById, [ book_id ] ),
+  getAuthors: book_id => db.any( getAuthorByBookId, [ book_id ] ),
   queryBooks: ( column, option ) => db.any( queryBooks, [ column, option ] )
 }
 

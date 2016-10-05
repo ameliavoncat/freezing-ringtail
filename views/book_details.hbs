@@ -6,11 +6,9 @@
     <div class="details col-xs-8">
       <div class="row">
         <div class="col-xs-4 author-label"><h2>Author:</h2></div>
-        <div class="col-xs-8 author-name"><h2>{{book.author}}</h2></div>
-      </div>
-      <div class="row">
-        <div class="col-xs-4 publisher-label"><h2>Publisher:</h2></div>
-        <div class="col-xs-8 publisher-name"><h2>{{book.publisher}}</h2></div>
+        {{#each authors}}
+          <div class="col-xs-8 author-name"><h2>{{name}}</h2></div>
+        {{/each}}
       </div>
     </div>
   </div>

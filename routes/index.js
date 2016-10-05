@@ -25,11 +25,15 @@ router.get('/', ( request, response ) => {
 router.get('/book/:book_id', ( request, response ) => {
   const { book_id } = request.params
 
-  Book.getBookById( book_id )
-    .then( book => {
-      response.render( 'book_details', { book }  )
+  Promise.all([ Book.getBookById( book_id ), Book.getAuthors( book_id ) ])
+    .then( data => {
+      const [ book, authors ] = data
+
+      console.log('Data', data);
+
+
+      response.render( 'book_details', { book, authors }  )
     })
-    .catch( error => { message: error.message } )
 });
 
 

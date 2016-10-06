@@ -33,6 +33,10 @@ router.get('/admin', ( request, response ) => {
   response.render( 'admin' )
 } )
 
+router.get('/admin/book/delete', ( request, response ) => {
+  response.render( 'delete_book')
+} )
+
 /* GET create author page. */
 router.get( '/admin/author/create', ( request, response ) => {
   response.render( 'create_author' )

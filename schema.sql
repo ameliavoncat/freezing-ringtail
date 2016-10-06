@@ -11,7 +11,6 @@ CREATE TABLE books
   subtitle TEXT NOT NULL DEFAULT '',
   image_url VARCHAR(255) NOT NULL DEFAULT '',
   description TEXT NOT NULL,
-  page_count INTEGER NOT NULL,
   published_at TEXT NOT NULL DEFAULT ''
 );
 

@@ -33,8 +33,12 @@ router.get('/admin', ( request, response ) => {
   response.render( 'admin' )
 } )
 
-router.get('/admin/book/delete', ( request, response ) => {
-  response.render( 'delete_book')
+router.get('/admin/book/delete/:book_id', ( request, response ) => {
+  const { book_id } = request.params
+
+  Book.delete( book_id )
+    .then( () => response.redirect('/'))
+    .catch( error => error )
 } )
 
 /* GET create author page. */

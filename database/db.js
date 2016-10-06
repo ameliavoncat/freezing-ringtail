@@ -11,7 +11,8 @@ const countGenres = 'SELECT COUNT(*) FROM genres'
 const countPublishers = 'SELECT COUNT(*) FROM publishers'
 
 const getBookById = 'SELECT * FROM books WHERE id=$1'
-const queryBooks = 'SELECT * FROM books WHERE $1 = $2'
+// const queryBooks = 'SELECT * FROM books WHERE $1 = $2'
+const deleteBook = 'DELETE FROM books WHERE id = $1'
 
 const getAuthors = 'SELECT * FROM authors'
 const getAuthorById = 'SELECT * FROM authors WHERE id = $1'
@@ -109,7 +110,8 @@ Book = {
   getGenres: book_id => db.any( getGenreByBookId, [ book_id ]),
   create: ( title, description ) => db.one( createBook, [ title, description ] ),
   joinAuthor: ( author_id, book_id ) => db.none( joinAuthorAndBook, [ author_id, book_id ] ),
-  joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] )
+  joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] ),
+  delete: id => db.none( deleteBook, [ id ])
 }
 
 Author = {

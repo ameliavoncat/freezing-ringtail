@@ -12,7 +12,8 @@ CREATE TABLE books
   image_url VARCHAR(255) NOT NULL DEFAULT '',
   description TEXT NOT NULL DEFAULT '',
   publisher TEXT NOT NULL DEFAULT '',
-  year TEXT NOT NULL DEFAULT ''
+  year TEXT NOT NULL DEFAULT '',
+  page_count INTEGER NOT NULL DEFAULT 0
 );
 
 DROP TABLE IF EXISTS genres;

@@ -30,8 +30,9 @@ const getBooks = function(query){
         subtitle: book.volumeInfo.subtitle,
         image_url: (book.volumeInfo.imageLinks||{}).thumbnail,
         description: book.volumeInfo.description,
-        page_count: book.volumeInfo.pageCount,
-        published_at: book.volumeInfo.publishedDate,
+        publisher: book.volumeInfo.publisher,
+        year: book.volumeInfo.publishedDate
+
       }
 
       const insertBook = table('books').insert(booksRow)+";\n";

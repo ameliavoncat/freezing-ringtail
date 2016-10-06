@@ -91,18 +91,37 @@ const joinGenreAndBook = `
   VALUES ( $1, $2 )
 `
 
-const getBooksByCategory = `
-  SELECT
-    *
-  FROM
-    books
-  WHERE
-    $1 = $2
-  LIMIT
-    $3
-  OFFSET
-    $4
-`
+const Search = {
+  forBooks: (search, size, page) => {
+    const variables = []
+    let sql = `SELECT DISTINCT(books.*) FROM books
+    `
+
+    if (search){
+      let search_query = search
+        .toLowerCase()
+        .replace(/^ */, '%')
+        .replace(/ *$/, '%')
+        .replace(/ +/g, '%')
+
+      variables.push( search_query )
+
+      sql += `
+      LEFT JOIN book_authors ON books.id=book_authors.book_id
+      LEFT JOIN authors ON authors.id=book_authors.author_id
+      LEFT JOIN book_genres ON books.id=book_genres.book_id
+      LEFT JOIN genres ON genres.id=book_genres.genre_id
+      WHERE LOWER(books.title)  LIKE $${variables.length}
+      OR LOWER(authors.name) LIKE $${variables.length}
+      OR LOWER(genres.name) LIKE $${variables.length}
+      ORDER BY books.id ASC
+      `
+    }
+
+    return db.any( sql, variables, size, size * page )
+  }
+}
+
 
 // -----------------------------------------------
 
@@ -124,10 +143,7 @@ Book = {
   create: ( title, description ) => db.one( createBook, [ title, description ] ),
   joinAuthor: ( author_id, book_id ) => db.none( joinAuthorAndBook, [ author_id, book_id ] ),
   joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] ),
-  delete: id => db.none( deleteBook, [ id ]),
-  searchByCategory: ( searchBy, searchTerm, size, page ) => {
-    return db.any( getBooksByCategory, [ searchBy, searchTerm, size, page * size ] )
-  }
+  delete: id => db.none( deleteBook, [ id ])
 }
 
 Author = {
@@ -143,4 +159,4 @@ Genre = {
   create: name => db.one( createGenre, [ name ] )
 }
 
-module.exports = { Count, Book, Author, Genre }
+module.exports = { Count, Book, Author, Genre, Search }

@@ -71,37 +71,36 @@ router.get( '/admin/book/create', ( request, response ) => {
 
 /* POST new book data. */
 router.post( '/book/create', ( request, response ) => {
-  const { title, description, author, genre, bio } = request.body
+  const { title, description, author, genre } = request.body
 
   Book.create( title, description )
     .then( book => {
       const book_id = book.id
-      console.log( 'Id of Book', book.id )
 
       Promise.all([ Author.getName( author ), Genre.getName( genre ) ])
         .then( data => {
-            const [ author, genre ] = data
+            const [ authorData, genreData ] = data
 
-            console.log( 'Data', data )
-
-            if ( author === null ) {
-              Author.create( author, bio ).then( author => {
+            if ( authorData === null || []) {
+              Author.create( author ).then( author => {
                 const author_id = author.id
+
+                console.log('Author id', author_id);
 
                 Book.joinAuthor( author_id, book_id )
               })
             } else {
-              Book.joinAuthor( author.id, book_id )
+              Book.joinAuthor( authorData.id, book_id )
             }
 
-            if ( genre === null ) {
+            if ( genreData === null || [] ) {
               Genre.create( genre ).then( genre => {
                 const genre_id = genre.id
 
                 Book.joinGenre( genre_id, book_id )
               })
             } else {
-              Book.joinGenre( genre.id, book_id )
+              Book.joinGenre( genreData.id, book_id )
             }
 
             response.redirect( `/book/${book_id}` )

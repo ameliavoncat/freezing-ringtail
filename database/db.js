@@ -52,9 +52,9 @@ const getGenreByBookId = `
 const createAuthor = `
 INSERT
 INTO
-  authors( name, bio )
+  authors( name )
 VALUES
-  ($1, $2)
+  ($1)
 RETURNING
   id
 `
@@ -72,7 +72,7 @@ RETURNING
 const createGenre = `
 INSERT
 INTO
-  books( name )
+  genres( name )
 VALUES
   ($1)
 RETURNING
@@ -118,12 +118,12 @@ Author = {
   getAuthors: () => db.any( getAuthors ),
   getName: name => db.oneOrNone( getAuthorName, [ name ] ) ,
   getOne: (author_id) => db.one( getAuthorById, [ author_id ]),
-  create: ( name, bio ) => db.one( createAuthor, [ name, bio ] )
+  create: ( name ) => db.one( createAuthor, [ name ] )
 }
 
 Genre = {
   getGenres: () => db.any( getGenres ),
-  getName: name => db.oneOrNone( getGenreName, [ name ] ),
+  getName: name => db.manyOrNone( getGenreName, [ name ] ),
   create: name => db.one( createGenre, [ name ] )
 }
 

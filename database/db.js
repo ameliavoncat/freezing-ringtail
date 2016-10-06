@@ -93,7 +93,7 @@ const joinGenreAndBook = `
 
 const Search = {
   forBooks: (search, size, page) => {
-    const variables = []
+    const variables = [size, page*size]
     let sql = `SELECT DISTINCT(books.*) FROM books
     `
 
@@ -115,10 +115,11 @@ const Search = {
       OR LOWER(authors.name) LIKE $${variables.length}
       OR LOWER(genres.name) LIKE $${variables.length}
       ORDER BY books.id ASC
+      LIMIT $1 OFFSET $2
       `
     }
 
-    return db.any( sql, variables, size, size * page )
+    return db.any( sql, variables )
   }
 }
 

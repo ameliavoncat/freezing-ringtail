@@ -12,8 +12,8 @@ Creating this web application will provide exposure to:
 
 ## Specifications
 
-- [ ] Any user can add books into the system via an admin page
-- [ ] Users can search for books by title OR by author OR by genre, and search results will be presented in a new page
+- [x] Any user can add books into the system via an admin page
+- [x] Users can search for books by title OR by author OR by genre, and search results will be presented in a new page
 - [x] Users can view book details on a book detail page, linked to from the listing or search pages
 - [x] Store books in Postgres database
 - [x] Uses express framework

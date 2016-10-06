@@ -10,8 +10,9 @@ CREATE TABLE books
   title VARCHAR(255) NOT NULL,
   subtitle TEXT NOT NULL DEFAULT '',
   image_url VARCHAR(255) NOT NULL DEFAULT '',
-  description TEXT NOT NULL,
-  published_at TEXT NOT NULL DEFAULT ''
+  description TEXT NOT NULL DEFAULT '',
+  publisher TEXT NOT NULL DEFAULT '',
+  year TEXT NOT NULL DEFAULT ''
 );
 
 DROP TABLE IF EXISTS genres;

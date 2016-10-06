@@ -1,20 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const { Book, Author, Genre } = require('../database/db.js');
+const { Book, Author, Genre, Search } = require('../database/db.js');
 
 
 /* GET home page. */
 router.get('/', ( request, response ) => {
 
   const { query } = request
-
+  const { search_query } = request.query
   const page = parseInt( query.page || 1 )
   const size = parseInt( query.size || 8 )
-
+  const nextPage = page + 1
   const previousPage = page - 1 > 0 ? page - 1 : 1
+  console.log("outside if", search_query)
 
-  Book.getAll( size, page )
-    .then( books => response.render( 'index', { books, page, size, nextPage: page + 1, previousPage } ) )
+  if (search_query === undefined ){
+    console.log("Inside if")
+    Book.getAll( size, page )
+      .then( books => response.render( 'index', { books, page, size, nextPage, previousPage } ) )
+
+  }
+else {
+  Search.forBooks( search_query, size, page ).then( books => {
+    response.render( "index", {books, page, size, nextPage, previousPage} )
+  })
+}
+
 });
 
 /* GET book detail. */
@@ -70,31 +81,10 @@ router.get( '/admin/book/create', ( request, response ) => {
 })
 
 
-router.get( '/book/search?search-term=:searchTerm&search-by=:searchBy', ( request, response ) => {
-  const {searchBy, searchTerm} = request.params
-  const { query } = request
+router.get('/search/books', ( request, response ) => {
 
-  const page = parseInt( query.page || 1 )
-  const size = parseInt( query.size || 8 )
+})
 
-  const previousPage = page - 1 > 0 ? page - 1 : 1
-
-console.log('search by: ' + searchBy)
-console.log('search term: ' + searchTerm)
-    if(searchBy==='category'||searchTerm===null){
-      response.redirect( '/')
-
-
-    } else {
-
-        Book.getBooksByCategory( searchBy, seachTerm, size, page )
-          .then( books => response.render( 'index', { books, page, size, nextPage: page + 1, previousPage } ) )
-
-    }
-
-
-
-});
 
 
 // })

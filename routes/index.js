@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Book, Author } = require('../database/db.js');
+const { Book, Author, Genre } = require('../database/db.js');
 
 
 /* GET home page. */
@@ -30,7 +30,7 @@ router.get('/book/:book_id', ( request, response ) => {
 });
 
 /* GET create author page. */
-router.get( '/author/create', ( request, response ) => {
+router.get( '/admin/author/create', ( request, response ) => {
   response.render( 'create_author' )
 } )
 
@@ -52,5 +52,49 @@ router.get( '/author/:author_id', ( request, response ) => {
     } )
 })
 
+/* GET create book page. */
+router.get( '/admin/book/create', ( request, response ) => {
+  response.render( 'create_book' )
+})
+
+/* POST new book data. */
+router.post( '/book/create', ( request, response ) => {
+  const { title, description, author, genre, bio } = request.body
+
+  Book.create( title, description )
+    .then( book => {
+      const book_id = book.id
+      console.log( 'Id of Book', book.id )
+
+      Promise.all([ Author.getName( author ), Genre.getName( genre ) ])
+        .then( data => {
+            const [ author, genre ] = data
+
+            console.log( 'Data', data )
+
+            if ( author === null ) {
+              Author.create( author, bio ).then( author => {
+                const author_id = author.id
+
+                Book.joinAuthor( author_id, book_id )
+              })
+            } else {
+              Book.joinAuthor( author.id, book_id )
+            }
+
+            if ( genre === null ) {
+              Genre.create( genre ).then( genre => {
+                const genre_id = genre.id
+
+                Book.joinGenre( genre_id, book_id )
+              })
+            } else {
+              Book.joinGenre( genre.id, book_id )
+            }
+
+            response.redirect( `/book/${book_id}` )
+        })
+    })
+})
 
 module.exports = router;

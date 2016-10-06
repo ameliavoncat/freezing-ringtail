@@ -45,7 +45,7 @@ const getGenreByBookId = `
   ON
     genres.id = book_genres.genre_id
   WHERE
-    book_genres.book_id=$1
+    book_genres.book_id = $1
   LIMIT
     1
 `;
@@ -91,6 +91,19 @@ const joinGenreAndBook = `
   VALUES ( $1, $2 )
 `
 
+const getBooksByCategory = `
+  SELECT
+    *
+  FROM
+    books
+  WHERE
+    $1 = $2
+  LIMIT
+    $3
+  OFFSET
+    $4
+`
+
 // -----------------------------------------------
 
 Count = {
@@ -111,7 +124,10 @@ Book = {
   create: ( title, description ) => db.one( createBook, [ title, description ] ),
   joinAuthor: ( author_id, book_id ) => db.none( joinAuthorAndBook, [ author_id, book_id ] ),
   joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] ),
-  delete: id => db.none( deleteBook, [ id ])
+  delete: id => db.none( deleteBook, [ id ]),
+  searchByCategory: ( searchBy, searchTerm, size, page ) => {
+    return db.any( getBooksByCategory, [ searchBy, searchTerm, size, page * size ] )
+  }
 }
 
 Author = {

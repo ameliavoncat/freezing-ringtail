@@ -69,6 +69,36 @@ router.get( '/admin/book/create', ( request, response ) => {
   response.render( 'create_book' )
 })
 
+
+router.get( '/book/search?search-term=:searchTerm&search-by=:searchBy', ( request, response ) => {
+  const {searchBy, searchTerm} = request.params
+  const { query } = request
+
+  const page = parseInt( query.page || 1 )
+  const size = parseInt( query.size || 8 )
+
+  const previousPage = page - 1 > 0 ? page - 1 : 1
+
+console.log('search by: ' + searchBy)
+console.log('search term: ' + searchTerm)
+    if(searchBy==='category'||searchTerm===null){
+      response.redirect( '/')
+
+
+    } else {
+
+        Book.getBooksByCategory( searchBy, seachTerm, size, page )
+          .then( books => response.render( 'index', { books, page, size, nextPage: page + 1, previousPage } ) )
+
+    }
+
+
+
+});
+
+
+// })
+
 /* POST new book data. */
 router.post( '/book/create', ( request, response ) => {
   const { title, description, author, genre } = request.body

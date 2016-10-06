@@ -4,6 +4,16 @@
     </div>
     <div class="col-xs-6"><h1>Library App</h1></div>
     <div class="col-xs-3">
+      <form action="/book/search" autocomplete="off" method="get">
+        <input name="search-term" type="text" value="Search">
+          <select name="search-by">
+            <option value="category" selected="selected">Search Category</option>
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+            <option value="genre">Genre</option>
+          </select>
+        <input id="search-button" class="btn btn-default" type="submit"></input>
+      </form>
       <a id="admin-button" class="btn btn-default" href="/admin">Admin Page</a>
     </div>
   </div>

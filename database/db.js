@@ -45,16 +45,16 @@ const getGenreByBookId = `
   ON
     genres.id = book_genres.genre_id
   WHERE
-    book_genres.book_id=$1
+    book_genres.book_id = $1
   LIMIT
     1
 `;
 const createAuthor = `
 INSERT
 INTO
-  authors( name, bio )
+  authors( name )
 VALUES
-  ($1, $2)
+  ($1)
 RETURNING
   id
 `
@@ -72,7 +72,7 @@ RETURNING
 const createGenre = `
 INSERT
 INTO
-  books( name )
+  genres( name )
 VALUES
   ($1)
 RETURNING
@@ -89,6 +89,19 @@ const joinGenreAndBook = `
   INSERT INTO
     book_genres( genre_id, book_id )
   VALUES ( $1, $2 )
+`
+
+const getBooksByCategory = `
+  SELECT
+    *
+  FROM
+    books
+  WHERE
+    $1 = $2
+  LIMIT
+    $3
+  OFFSET
+    $4
 `
 
 // -----------------------------------------------
@@ -111,19 +124,22 @@ Book = {
   create: ( title, description ) => db.one( createBook, [ title, description ] ),
   joinAuthor: ( author_id, book_id ) => db.none( joinAuthorAndBook, [ author_id, book_id ] ),
   joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] ),
-  delete: id => db.none( deleteBook, [ id ])
+  delete: id => db.none( deleteBook, [ id ]),
+  searchByCategory: ( searchBy, searchTerm, size, page ) => {
+    return db.any( getBooksByCategory, [ searchBy, searchTerm, size, page * size ] )
+  }
 }
 
 Author = {
   getAuthors: () => db.any( getAuthors ),
   getName: name => db.oneOrNone( getAuthorName, [ name ] ) ,
   getOne: (author_id) => db.one( getAuthorById, [ author_id ]),
-  create: ( name, bio ) => db.one( createAuthor, [ name, bio ] )
+  create: ( name ) => db.one( createAuthor, [ name ] )
 }
 
 Genre = {
   getGenres: () => db.any( getGenres ),
-  getName: name => db.oneOrNone( getGenreName, [ name ] ),
+  getName: name => db.manyOrNone( getGenreName, [ name ] ),
   create: name => db.one( createGenre, [ name ] )
 }
 

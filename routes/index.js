@@ -69,39 +69,68 @@ router.get( '/admin/book/create', ( request, response ) => {
   response.render( 'create_book' )
 })
 
+
+router.get( '/book/search?search-term=:searchTerm&search-by=:searchBy', ( request, response ) => {
+  const {searchBy, searchTerm} = request.params
+  const { query } = request
+
+  const page = parseInt( query.page || 1 )
+  const size = parseInt( query.size || 8 )
+
+  const previousPage = page - 1 > 0 ? page - 1 : 1
+
+console.log('search by: ' + searchBy)
+console.log('search term: ' + searchTerm)
+    if(searchBy==='category'||searchTerm===null){
+      response.redirect( '/')
+
+
+    } else {
+
+        Book.getBooksByCategory( searchBy, seachTerm, size, page )
+          .then( books => response.render( 'index', { books, page, size, nextPage: page + 1, previousPage } ) )
+
+    }
+
+
+
+});
+
+
+// })
+
 /* POST new book data. */
 router.post( '/book/create', ( request, response ) => {
-  const { title, description, author, genre, bio } = request.body
+  const { title, description, author, genre } = request.body
 
   Book.create( title, description )
     .then( book => {
       const book_id = book.id
-      console.log( 'Id of Book', book.id )
 
       Promise.all([ Author.getName( author ), Genre.getName( genre ) ])
         .then( data => {
-            const [ author, genre ] = data
+            const [ authorData, genreData ] = data
 
-            console.log( 'Data', data )
-
-            if ( author === null ) {
-              Author.create( author, bio ).then( author => {
+            if ( authorData === null || []) {
+              Author.create( author ).then( author => {
                 const author_id = author.id
+
+                console.log('Author id', author_id);
 
                 Book.joinAuthor( author_id, book_id )
               })
             } else {
-              Book.joinAuthor( author.id, book_id )
+              Book.joinAuthor( authorData.id, book_id )
             }
 
-            if ( genre === null ) {
+            if ( genreData === null || [] ) {
               Genre.create( genre ).then( genre => {
                 const genre_id = genre.id
 
                 Book.joinGenre( genre_id, book_id )
               })
             } else {
-              Book.joinGenre( genre.id, book_id )
+              Book.joinGenre( genreData.id, book_id )
             }
 
             response.redirect( `/book/${book_id}` )

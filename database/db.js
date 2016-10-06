@@ -90,6 +90,14 @@ const joinGenreAndBook = `
     book_genres( genre_id, book_id )
   VALUES ( $1, $2 )
 `
+const updateBook = `
+  UPDATE
+    books
+  SET
+    title=$2, description=$3
+  WHERE
+    id=$1
+`
 
 const Search = {
   forBooks: (search, size, page) => {
@@ -144,7 +152,8 @@ Book = {
   create: ( title, description ) => db.one( createBook, [ title, description ] ),
   joinAuthor: ( author_id, book_id ) => db.none( joinAuthorAndBook, [ author_id, book_id ] ),
   joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] ),
-  delete: id => db.none( deleteBook, [ id ])
+  delete: id => db.none( deleteBook, [ id ]),
+  update: ( id, title, description ) => db.none( updateBook, [ id, title, description ])
 }
 
 Author = {

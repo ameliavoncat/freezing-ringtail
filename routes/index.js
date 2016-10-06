@@ -39,6 +39,18 @@ router.get('/book/:book_id', ( request, response ) => {
       response.render( 'book_details', { book, authors, genres }  )
     })
 });
+router.get('/admin/book/update/:book_id', ( request, response ) => {
+  const { book_id } = request.params
+  response.render('update_book.hbs', {book_id})
+})
+
+
+router.post('/book/update/:book_id', ( request, response ) => {
+  const { book_id, title, author, description } = request.params
+
+  Book.update( book_id, title, author, description )
+  .then( () => response.redirect( '/book/:book_id'))
+})
 
 router.get('/admin', ( request, response ) => {
   response.render( 'admin' )

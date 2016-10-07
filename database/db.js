@@ -5,13 +5,7 @@ const db = pgp( connectionString );
 
 const getAllBooks = 'SELECT * FROM books LIMIT $1 OFFSET $2'
 
-const countBooks = 'SELECT COUNT(*) FROM books'
-const countAuthors = 'SELECT COUNT(*) FROM authors'
-const countGenres = 'SELECT COUNT(*) FROM genres'
-const countPublishers = 'SELECT COUNT(*) FROM publishers'
-
 const getBookById = 'SELECT * FROM books WHERE id=$1'
-// const queryBooks = 'SELECT * FROM books WHERE $1 = $2'
 const deleteBook = 'DELETE FROM books WHERE id = $1'
 
 const getAuthors = 'SELECT * FROM authors'
@@ -21,7 +15,6 @@ const getAuthorName = 'SELECT name FROM authors WHERE name = $1'
 const getGenres = 'SELECT * FROM genres'
 const getGenreName = 'SELECT name FROM genres WHERE name = $1'
 
-const getPublishers = 'SELECT * FROM publishers'
 const getAuthorByBookId =   `
   SELECT
     *
@@ -33,12 +26,11 @@ const getAuthorByBookId =   `
     authors.id = book_authors.author_id
   WHERE
     book_authors.book_id=$1
-  `;
+  `
 
 const getAuthorIdByBookId = 'SELECT author_id FROM book_authors WHERE book_id = $1 LIMIT 1'
 
 const getGenreIdByBookId = 'SELECT genre_id FROM book_genres WHERE book_id = $1 LIMIT 1'
-
 
 const getGenreByBookId = `
   SELECT
@@ -53,7 +45,8 @@ const getGenreByBookId = `
     book_genres.book_id = $1
   LIMIT
     1
-`;
+`
+
 const createAuthor = `
 INSERT
 INTO
@@ -95,13 +88,14 @@ const joinGenreAndBook = `
     book_genres( genre_id, book_id )
   VALUES ( $1, $2 )
 `
+
 const updateBook = `
   UPDATE
     books
   SET
-    title=$1, description=$2
+    title=$1, description=$2, image_url=$3
   WHERE
-    id = $3
+    id = $4
 `
 
 const updateGenre = 'UPDATE genres SET name=$1 WHERE id = $2'
@@ -109,12 +103,11 @@ const updateGenre = 'UPDATE genres SET name=$1 WHERE id = $2'
 const updateAuthor = 'UPDATE authors SET name=$1 WHERE id = $2'
 
 const Search = {
-  forBooks: (search, size, page) => {
-    const variables = [size, page*size]
-    let sql = `SELECT DISTINCT(books.*) FROM books
-    `
+  forBooks: ( search, size, page ) => {
+    const variables = [ size, page * size ]
+    let sql = `SELECT DISTINCT(books.*) FROM books`
 
-    if (search){
+    if ( search ){
       let search_query = search
         .toLowerCase()
         .replace(/^ */, '%')
@@ -143,13 +136,6 @@ const Search = {
 
 // -----------------------------------------------
 
-Count = {
-  countAuthors: () => db.any( countAuthors ),
-  countBooks: () => db.any( countBooks ),
-  countGenres: () => db.any( countGenres ),
-  countPublishers: () => db.any( countPublishers )
-}
-
 Book = {
   getAll: ( size, page ) => {
     return db.any( getAllBooks, [ size, page * size - size ] )
@@ -162,7 +148,7 @@ Book = {
   joinAuthor: ( author_id, book_id ) => db.none( joinAuthorAndBook, [ author_id, book_id ] ),
   joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] ),
   delete: id => db.none( deleteBook, [ id ]),
-  update: ( id, title, description ) => db.none( updateBook, [ title, description, id ])
+  update: ( id, title, description, image_url ) => db.none( updateBook, [ title, description, image_url, id ])
 }
 
 Author = {
@@ -182,4 +168,4 @@ Genre = {
   update: ( genre_id, genre ) => db.none( updateGenre, [ genre, genre_id ] )
 }
 
-module.exports = { Count, Book, Author, Genre, Search }
+module.exports = { Book, Author, Genre, Search }

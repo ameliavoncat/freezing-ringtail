@@ -30,7 +30,7 @@ Creating this web application will provide exposure to:
 - Code is well organized into a meaningful file structure
 - Interface is user friendly
 
-
+---
 
 ## [Stack File] (https://github.com/ameliavoncat/freezing-ringtail/blob/master/STACK.md)
 

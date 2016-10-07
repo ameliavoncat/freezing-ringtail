@@ -36,7 +36,7 @@ Model -
 
 <!-- LICENSE -->
 
-<a rel="license" href="https://github.com/ameliavoncat/freezing-ringtail/blob/master/LICENSE"><img alt="MIT License" style="border-width:0" src="https://github.com/ameliavoncat/freezing-ringtail/blob/master/LICENSE" /></a>
+##<a rel="license" href="https://github.com/ameliavoncat/freezing-ringtail/blob/master/LICENSE"><img alt="MIT License" style="border-width:0" src="https://github.com/ameliavoncat/freezing-ringtail/blob/master/LICENSE" /></a>
 <br />This work is licensed under the <a rel="license" href="https://github.com/ameliavoncat/freezing-ringtail/blob/master/LICENSE">MIT License</a>.
 
 [mit-license]: https://opensource.org/licenses/MIT

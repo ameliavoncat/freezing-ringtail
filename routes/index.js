@@ -50,10 +50,8 @@ router.post('/book/update/:book_id', ( request, response ) => {
   if ( author ) {
     Promise.all([ Author.getIdByBookId( book_id ) ])
     .then( data => {
-      console.log(data)
       const author_id = data[0]['author_id']
       Author.updateName( author_id, author )
-      // console.log("ID and new NAME: ", data[0]['author_id'], author )
     })
   }
 
@@ -125,8 +123,6 @@ router.post( '/book/create', ( request, response ) => {
             if ( authorData === null || []) {
               Author.create( author ).then( author => {
                 const author_id = author.id
-
-                console.log('Author id', author_id);
 
                 Book.joinAuthor( author_id, book_id )
               })

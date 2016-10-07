@@ -8,5 +8,5 @@
   - [Books API Importer] (https://github.com/deadlyicon/books-api-importer)
   
 ###Database
-  -[PSQL] (https://www.postgresql.org/)
-  -[PG Promise] (https://github.com/vitaly-t/pg-promise)
+  - [PSQL] (https://www.postgresql.org/)
+  - [PG Promise] (https://github.com/vitaly-t/pg-promise)

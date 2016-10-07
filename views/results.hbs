@@ -1,0 +1,54 @@
+<div id="header" class="container-fluid main-color">
+  <div class="row no-margin">
+    <div class="col-xs-4">
+      <a id="admin-button" class="btn btn-default" href="/admin">Admin Page</a>
+    </div>
+    <div class="col-xs-4"><h1>Simple Book Store</h1></div>
+    <div class="col-xs-4">
+      <form id="search-form" action="/" autocomplete="off" method="get">
+        <input name="search_query" type="text" value="Book Title">
+        <input id="search-button" value="Search" class="btn btn-default" type="submit"></input>
+      </form>
+
+    </div>
+  </div>
+</div>
+<div id="books-container" class="container-fluid">
+<div id="books" class="row">
+  <!-- <div class="padding col-xs-1"></div> -->
+    {{#each books}}
+      <a href="/book/{{id}}">
+        <div class="book col-xs-3 box-color">
+          <div class="row book-row">
+            <div class="book-title col-xs-12">{{title}}</div>
+            <div class='col-xs-8 padding'></div>
+            <div class='col-xs-4 author'>{{author}}</div>
+            <div class="col-xs-2 padding"></div>
+            <img class="book-image col-xs-8" src="{{image_url}}" width="100px" height="100px" />
+            <div class="col-xs-2 padding"></div>
+            <!-- <div class="book-description col-xs-12">{{description}}</div> -->
+          </div>
+        </div>
+      </a>
+    {{/each}}
+      <!-- <div class="padding col-xs-1"></div> -->
+</div>
+</div>
+
+<div id="footer" class="container-fluid main-color">
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="row">
+        <a class="col-xs-12 btn btn-default" id="prev" href="/search/{{search_query}}?page={{previousPage}}">
+          Previous
+        </a>
+      </div>
+    </div>
+  <div class="col-xs-8"><h5>{{page}}</h5></div>
+  <div class="col-xs-2">
+    <div class="row">
+<a class="col-xs-12 btn btn-default" id="next" href="/search/{{search_query}}?page={{nextPage}}">Next</a>
+    </div>
+  </div>
+</div>
+</div>

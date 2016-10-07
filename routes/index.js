@@ -20,11 +20,24 @@ router.get('/', ( request, response ) => {
   }
 else {
   Search.forBooks( search_query, size, page ).then( books => {
-    response.render( "index", {books, page, size, nextPage, previousPage} )
+    response.redirect( "/search/"+ search_query )
   })
 }
 
 });
+
+router.get('/search/:search_query', (request, response ) => {
+  const { query } = request
+  const { search_query } = request.params
+  const page = parseInt( query.page || 1 )
+  const size = parseInt( query.size || 8 )
+  const nextPage = page + 1
+  const previousPage = page - 1 > 0 ? page - 1 : 1
+
+  Search.forBooks(search_query, size, page).then( books => {
+    response.render("results", { books, page, size, nextPage, previousPage, search_query} )
+  })
+})
 
 /* GET book detail. */
 router.get('/book/:book_id', ( request, response ) => {
@@ -100,13 +113,6 @@ router.get( '/admin/book/create', ( request, response ) => {
 })
 
 
-router.get('/search/books', ( request, response ) => {
-
-})
-
-
-
-// })
 
 /* POST new book data. */
 router.post( '/book/create', ( request, response ) => {

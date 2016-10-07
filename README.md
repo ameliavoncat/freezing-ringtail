@@ -37,8 +37,8 @@ Creating this web application will provide exposure to:
 
 ---
 
-## Stack File
-[Stack.md] (https://github.com/ameliavoncat/freezing-ringtail/blob/master/STACK.md)
+## [Stack File] (https://github.com/ameliavoncat/freezing-ringtail/blob/master/STACK.md)
+
 
 
 <!-- LICENSE -->

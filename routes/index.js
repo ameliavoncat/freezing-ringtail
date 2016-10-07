@@ -10,7 +10,7 @@ router.get('/', ( request, response ) => {
   const { search_query } = request.query
   const page = parseInt( query.page || 1 )
   const size = parseInt( query.size || 8 )
-  const nextPage = page + 1
+  const nextPage = page + 1 < 230 ? page + 1 : 1
   const previousPage = page - 1 > 0 ? page - 1 : 1
 
   if (search_query === undefined ){

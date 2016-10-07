@@ -42,5 +42,5 @@ Model - [Database Map][database-map]
 
 [mit-license]: https://opensource.org/licenses/MIT
 
-[database-map]: https://github.com/ameliavoncat/freezing-ringtail/blob/master/Screen%20Shot%202016-10-07%20at%2011.23.51%20AM.png
+[database-map]: https://github.com/ameliavoncat/freezing-ringtail/blob/master/Screen%20Shot%202016-10-07%20at%2011.23.51%20AM.png?raw=true
 

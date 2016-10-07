@@ -30,8 +30,7 @@ Creating this web application will provide exposure to:
 - Code is well organized into a meaningful file structure
 - Interface is user friendly
 
-## Resources
-Model - 
+## Model - 
 ![database-map] (https://raw.githubusercontent.com/ameliavoncat/freezing-ringtail/master/Screen%20Shot%202016-10-07%20at%2011.23.51%20AM.png) 
 
 ---

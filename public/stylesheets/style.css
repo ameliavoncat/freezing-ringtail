@@ -14,7 +14,7 @@ a, a:hover,a:visited{
 }
 .no-margin{
   margin-left:0;
-  margin-right:0;
+  margin-right:0; 
 }
 #admin-button, #search-form{
   margin-top:2em;

@@ -32,6 +32,7 @@ Creating this web application will provide exposure to:
 
 ## Resources
 Model -
+
 [Database Map]: https://github.com/ameliavoncat/freezing-ringtail/blob/master/Screen%20Shot%202016-10-07%20at%2011.23.51%20AM.png
 ---
 

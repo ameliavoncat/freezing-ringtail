@@ -1,14 +1,15 @@
 <div id="header" class="container-fluid main-color">
-  <div class="row">
-    <div class="col-xs-3">
-    </div>
-    <div class="col-xs-6"><h1>Library App</h1></div>
-    <div class="col-xs-3">
-      <form action="/" autocomplete="off" method="get">
-        <input name="search_query" type="text" value="Search">
-        <input id="search-button" class="btn btn-default" type="submit"></input>
-      </form>
+  <div class="row no-margin">
+    <div class="col-xs-4">
       <a id="admin-button" class="btn btn-default" href="/admin">Admin Page</a>
+    </div>
+    <div class="col-xs-4"><h1>Simple Book Store</h1></div>
+    <div class="col-xs-4">
+      <form id="search-form" action="/" autocomplete="off" method="get">
+        <input name="search_query" type="text" value="Book Title">
+        <input id="search-button" value="Search" class="btn btn-default" type="submit"></input>
+      </form>
+
     </div>
   </div>
 </div>
@@ -43,7 +44,7 @@
         </a>
       </div>
     </div>
-  <div class="col-xs-8"></div>
+  <div class="col-xs-8"><h5>{{page}}</h5></div>
   <div class="col-xs-2">
     <div class="row">
 <a class="col-xs-12 btn btn-default" id="next" href="/?page={{nextPage}}">Next</a>

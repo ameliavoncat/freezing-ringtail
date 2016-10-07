@@ -147,7 +147,7 @@ Count = {
 
 Book = {
   getAll: ( size, page ) => {
-    return db.any( getAllBooks, [ size, page * size ] )
+    return db.any( getAllBooks, [ size, page * size - size ] )
   },
   getBookById: book_id => db.one( getBookById, [ book_id ] ),
   getAuthors: book_id => db.any( getAuthorByBookId, [ book_id ] ),

@@ -32,7 +32,6 @@ Creating this web application will provide exposure to:
 
 ## Resources
 Model -
-http://ondras.zarovi.cz/sql/demo/
 ---
 
 <!-- LICENSE -->

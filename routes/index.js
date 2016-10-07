@@ -58,7 +58,7 @@ router.get('/admin/book/update/:book_id', ( request, response ) => {
 
 router.post('/book/update/:book_id', ( request, response ) => {
 
-  const { book_id, title, description, author } = request.body
+  const { book_id, title, description, image_url, author } = request.body
 
   if ( author ) {
     Promise.all([ Author.getIdByBookId( book_id ) ])
@@ -91,9 +91,9 @@ router.get( '/admin/author/create', ( request, response ) => {
 
 /* POST new author data. */
 router.post( '/author/create', ( request, response ) => {
-   const { name, bio } = request.body
+   const { name, bio, image_url } = request.body
 
-   Author.create(  name, bio  )
+   Author.create(  name, bio, image_url  )
     .then( author => {
       response.redirect( '/author/' + author.id )
     })
@@ -116,9 +116,9 @@ router.get( '/admin/book/create', ( request, response ) => {
 
 /* POST new book data. */
 router.post( '/book/create', ( request, response ) => {
-  const { title, description, author, genre } = request.body
+  const { title, description, image_url, author, genre } = request.body
 
-  Book.create( title, description )
+  Book.create( title, description, image_url )
     .then( book => {
       const book_id = book.id
 

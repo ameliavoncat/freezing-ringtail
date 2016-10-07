@@ -57,7 +57,7 @@ router.get('/admin/book/update/:book_id', ( request, response ) => {
 
 router.post('/book/update/:book_id', ( request, response ) => {
 
-  const { book_id, title, description, image_url, author } = request.body
+  const { book_id, title, description, image_url, author, genre } = request.body
 
   if ( author ) {
     Promise.all([ Author.getIdByBookId( book_id ) ])
@@ -67,7 +67,15 @@ router.post('/book/update/:book_id', ( request, response ) => {
     })
   }
 
-  Book.update( book_id, title, description )
+  if ( genre ) {
+    Promise.all([ Genre.getIdByBookId( book_id ) ])
+    .then( data => {
+      const genre_id = data[0]['genre_id']
+      Genre.update( genre_id, genre )
+    })
+  }
+
+  Book.update( book_id, title, description, image_url )
   .then( () => response.redirect( '/book/' + book_id))
 })
 

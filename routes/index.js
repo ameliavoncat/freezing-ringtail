@@ -46,16 +46,16 @@ router.get('/admin/book/update/:book_id', ( request, response ) => {
 router.post('/book/update/:book_id', ( request, response ) => {
 
   const { book_id, title, description, author } = request.body
-  //
-  // if ( author ) {
-  //   Promise.one( Author.getIdByBookId( book_id ) )
-  //   .then( data => {
-  //     const author_id = data
-  //     Author.updateName( author_id, author )
-  //     console.log("ID and new NAME: ", author_id, author )
-  //   })
-  //   console.log("After author update");
-  // }
+
+  if ( author ) {
+    Promise.all([ Author.getIdByBookId( book_id ) ])
+    .then( data => {
+      console.log(data)
+      const author_id = data[0]['author_id']
+      Author.updateName( author_id, author )
+      // console.log("ID and new NAME: ", data[0]['author_id'], author )
+    })
+  }
 
   Book.update( book_id, title, description )
   .then( () => response.redirect( '/book/' + book_id))

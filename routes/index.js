@@ -112,8 +112,6 @@ router.get( '/admin/book/create', ( request, response ) => {
   response.render( 'create_book' )
 })
 
-
-
 /* POST new book data. */
 router.post( '/book/create', ( request, response ) => {
   const { title, description, image_url, author, genre } = request.body
@@ -122,12 +120,14 @@ router.post( '/book/create', ( request, response ) => {
     .then( book => {
       const book_id = book.id
 
+      console.log('Book id ', book_id);
+
       Promise.all([ Author.getName( author ), Genre.getName( genre ) ])
         .then( data => {
             const [ authorData, genreData ] = data
 
             if ( authorData === null || []) {
-              Author.create( author ).then( author => {
+              Author.create( author, '', '' ).then( author => {
                 const author_id = author.id
 
                 Book.joinAuthor( author_id, book_id )

@@ -32,11 +32,6 @@ Creating this web application will provide exposure to:
 
 ---
 
-## [Stack File] (https://github.com/ameliavoncat/freezing-ringtail/blob/master/STACK.md)
-
-
----
-
 ## Model 
 ![database-map] (https://raw.githubusercontent.com/ameliavoncat/freezing-ringtail/master/Screen%20Shot%202016-10-07%20at%2011.23.51%20AM.png) 
 
@@ -48,6 +43,11 @@ Creating this web application will provide exposure to:
 
 ##<a rel="license" href="https://github.com/ameliavoncat/freezing-ringtail/blob/master/LICENSE"><img alt="MIT License" style="border-width:0" src="https://github.com/ameliavoncat/freezing-ringtail/blob/master/LICENSE" /></a>
 <br />This work is licensed under the <a rel="license" href="https://github.com/ameliavoncat/freezing-ringtail/blob/master/LICENSE">MIT License</a>.
+
+---
+
+## [Stack File] (https://github.com/ameliavoncat/freezing-ringtail/blob/master/STACK.md)
+
 
 [mit-license]: https://opensource.org/licenses/MIT
 

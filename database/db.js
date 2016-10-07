@@ -35,6 +35,8 @@ const getAuthorByBookId =   `
     book_authors.book_id=$1
   `;
 
+const getAuthorIdByBookId = 'SELECT author_id FROM book_authors WHERE book_id = $1 LIMIT 1'
+
 const getGenreByBookId = `
   SELECT
     *
@@ -94,10 +96,12 @@ const updateBook = `
   UPDATE
     books
   SET
-    title=$2, description=$3
+    title=$1, description=$2
   WHERE
-    id=$1
+    id = $3
 `
+
+const updateAuthor = 'UPDATE authors SET name=$1 WHERE id = $2'
 
 const Search = {
   forBooks: (search, size, page) => {
@@ -153,14 +157,16 @@ Book = {
   joinAuthor: ( author_id, book_id ) => db.none( joinAuthorAndBook, [ author_id, book_id ] ),
   joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] ),
   delete: id => db.none( deleteBook, [ id ]),
-  update: ( id, title, description ) => db.none( updateBook, [ id, title, description ])
+  update: ( id, title, description ) => db.none( updateBook, [ title, description, id ])
 }
 
 Author = {
   getAuthors: () => db.any( getAuthors ),
   getName: name => db.oneOrNone( getAuthorName, [ name ] ) ,
   getOne: (author_id) => db.one( getAuthorById, [ author_id ]),
-  create: ( name ) => db.one( createAuthor, [ name ] )
+  create: ( name ) => db.one( createAuthor, [ name ] ),
+  getIdByBookId: book_id => db.one( getAuthorIdByBookId, [ book_id ] ),
+  updateName: ( author_id, author ) => db.none( updateAuthor, [ author, author_id ] )
 }
 
 Genre = {

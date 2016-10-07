@@ -26,6 +26,7 @@ a, a:hover,a:visited{
 }
 #detail-image {
   margin-top:10%;
+  width:100%;
 }
 .detail-margins{
   margin-top:2.5%;

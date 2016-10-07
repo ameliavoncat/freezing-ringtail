@@ -31,7 +31,8 @@ Creating this web application will provide exposure to:
 - Interface is user friendly
 
 ## Resources
-Model - [Database Map][database-map]
+Model - 
+![database-map] (https://raw.githubusercontent.com/ameliavoncat/freezing-ringtail/master/Screen%20Shot%202016-10-07%20at%2011.23.51%20AM.png) 
 
 ---
 
@@ -42,5 +43,4 @@ Model - [Database Map][database-map]
 
 [mit-license]: https://opensource.org/licenses/MIT
 
-![database-map] (https://raw.githubusercontent.com/ameliavoncat/freezing-ringtail/master/Screen%20Shot%202016-10-07%20at%2011.23.51%20AM.png) 
 

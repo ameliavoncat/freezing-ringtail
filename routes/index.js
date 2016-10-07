@@ -52,7 +52,7 @@ router.get('/book/:book_id', ( request, response ) => {
 });
 router.get('/admin/book/update/:book_id', ( request, response ) => {
   const { book_id } = request.params
-  response.render('update_book.hbs', {book_id})
+  response.render('update_book', {book_id})
 })
 
 

@@ -31,6 +31,9 @@ Creating this web application will provide exposure to:
 - Interface is user friendly
 
 ---
+## Stack File
+[Stack.md] (https://github.com/ameliavoncat/freezing-ringtail/blob/master/STACK.md)
+
 
 ## Model 
 ![database-map] (https://raw.githubusercontent.com/ameliavoncat/freezing-ringtail/master/Screen%20Shot%202016-10-07%20at%2011.23.51%20AM.png) 

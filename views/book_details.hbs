@@ -1,15 +1,28 @@
 <div class="container">
   <div class="row">
 
-    <img src="{{book.image_url}}" class="col-xs-4"></img>
+
+<div class="col-xs-2"></div>
     <div class="details col-xs-8">
+      <div class="detail-margins">
       <div class="row">
-        <div id="header" class="col-xs-12"><h2>{{book.title}}</h2><h2 class="subtitle-text">{{book.subtitle}}</h2></div>
+        <div id="header" class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-1 padding"></div>
+            <div class="col-xs-2">
+              <img id="detail-image" src="{{book.image_url}}"></img>
+            </div>
+            <div class="col-xs-9">
+              <h2>{{book.title}}</h2>
+              <h2 class="subtitle-text">{{book.subtitle}}</h2>
+            </div>
+          </div>
+        </div>
 
         <div class="col-xs-4 author-label"><h5>Author:</h5></div>
-        {{#each authors}}
-          <div class="col-xs-8 author-name"><h5>{{name}}</h5></div>
-        {{/each}}
+
+          <div class="col-xs-8 author-name">  <h5>{{#each authors}}<span>{{name}} &nbsp</span>{{/each}}</h5></div>
+
       </div>
       <div class="row">
         <div class="col-xs-4 genre-label"><h5>Genre:</h5></div>
@@ -24,5 +37,7 @@
       <a class="btn btn-primary" href="/admin/book/update/{{book.id}}">Update</a>
     </div>
   </div>
+</div>
+<div class="col-xs-2"></div>
 </div>
 </div>

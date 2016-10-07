@@ -1,21 +1,52 @@
-a, a:hover,a:visited{
-  color:black !important;
+@import 'https://fonts.googleapis.com/css?family=Averia+Serif+Libre';
+
+body{
+  border-color:#2F2D37;
+  font-family:'Averia Serif Libre';
+  background-color:#DFEBE2;
+  text-align:center;
 
 }
-#admin-button{
+a, a:hover,a:visited{
+  color:black;
+
+
+}
+.no-margin{
+  margin-left:0;
+  margin-right:0;
+}
+#admin-button, #search-form{
   margin-top:2em;
 }
+
+.book-image{
+  width:50%;
+  height:auto;
+}
+#detail-image {
+  margin-top:10%;
+}
+.detail-margins{
+  margin-top:5%;
+  width:100%;
+  background-color:#9A93B7;
+  border:solid;
+}
+
 .book-row{
 }
 
 .main-color{
-background-color:#4E9E74;
+background-color:#9A93B7;
 
 }
 .box-color{
   background-color:#EB8B91;
   background-color:#FFB0B5;
   background-color:#B8AC9C;
+  background-color:#9A93B7;
+  box-shadow:0,0,1em, black;
 
 }
 .book{
@@ -30,9 +61,14 @@ background-color:#4E9E74;
 }
 
 #header{
+  width:100%;
+  font-family:'Averia Serif Libre';
   text-align:center;
   padding-top:0.1em;
   padding-bottom:0.5em;
+  border-color:#2F2D37;
+  border-bottom:solid;
+
 
 }
 .subtitle-text{
@@ -46,17 +82,8 @@ background-color:#4E9E74;
 .padding{
 }
 
-body {
-  /*margin-left:6%;
-  margin-right:6%;*/
-  background-color:#DFEBE2;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
 #footer{
+  border-top:solid;
   margin-top:1%;
   text-align:center;
 }

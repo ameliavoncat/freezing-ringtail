@@ -37,6 +37,9 @@ const getAuthorByBookId =   `
 
 const getAuthorIdByBookId = 'SELECT author_id FROM book_authors WHERE book_id = $1 LIMIT 1'
 
+const getGenreIdByBookId = 'SELECT genre_id FROM book_genres WHERE book_id = $1 LIMIT 1'
+
+
 const getGenreByBookId = `
   SELECT
     *
@@ -54,9 +57,9 @@ const getGenreByBookId = `
 const createAuthor = `
 INSERT
 INTO
-  authors( name )
+  authors( name, bio, image_url )
 VALUES
-  ($1)
+  ($1, $2, $3)
 RETURNING
   id
 `
@@ -64,9 +67,9 @@ RETURNING
 const createBook = `
 INSERT
 INTO
-  books( title, description )
+  books( title, description, image_url )
 VALUES
-  ($1, $2)
+  ($1, $2, $3)
 RETURNING
   id
 `
@@ -100,6 +103,8 @@ const updateBook = `
   WHERE
     id = $3
 `
+
+const updateGenre = 'UPDATE genres SET name=$1 WHERE id = $2'
 
 const updateAuthor = 'UPDATE authors SET name=$1 WHERE id = $2'
 
@@ -153,7 +158,7 @@ Book = {
   getAuthors: book_id => db.any( getAuthorByBookId, [ book_id ] ),
   queryBooks: ( column, option ) => db.any( queryBooks, [ column, option ] ),
   getGenres: book_id => db.any( getGenreByBookId, [ book_id ]),
-  create: ( title, description ) => db.one( createBook, [ title, description ] ),
+  create: ( title, description, image_url ) => db.one( createBook, [ title, description, image_url ] ),
   joinAuthor: ( author_id, book_id ) => db.none( joinAuthorAndBook, [ author_id, book_id ] ),
   joinGenre: ( genre_id, book_id ) => db.none( joinGenreAndBook, [ genre_id, book_id ] ),
   delete: id => db.none( deleteBook, [ id ]),
@@ -164,7 +169,7 @@ Author = {
   getAuthors: () => db.any( getAuthors ),
   getName: name => db.oneOrNone( getAuthorName, [ name ] ) ,
   getOne: (author_id) => db.one( getAuthorById, [ author_id ]),
-  create: ( name ) => db.one( createAuthor, [ name ] ),
+  create: ( name, bio, image_url ) => db.one( createAuthor, [ name, bio, image_url ] ),
   getIdByBookId: book_id => db.one( getAuthorIdByBookId, [ book_id ] ),
   updateName: ( author_id, author ) => db.none( updateAuthor, [ author, author_id ] )
 }
@@ -172,7 +177,9 @@ Author = {
 Genre = {
   getGenres: () => db.any( getGenres ),
   getName: name => db.manyOrNone( getGenreName, [ name ] ),
-  create: name => db.one( createGenre, [ name ] )
+  create: name => db.one( createGenre, [ name ] ),
+  getIdByBookId: book_id => db.one( getGenreByBookId, [ book_id ] ),
+  update: ( genre_id, genre ) => db.none( updateGenre, [ genre, genre_id ] )
 }
 
 module.exports = { Count, Book, Author, Genre, Search }

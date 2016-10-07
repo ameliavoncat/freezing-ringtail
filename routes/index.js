@@ -12,10 +12,8 @@ router.get('/', ( request, response ) => {
   const size = parseInt( query.size || 8 )
   const nextPage = page + 1
   const previousPage = page - 1 > 0 ? page - 1 : 1
-  console.log("outside if", search_query)
 
   if (search_query === undefined ){
-    console.log("Inside if")
     Book.getAll( size, page )
       .then( books => response.render( 'index', { books, page, size, nextPage, previousPage } ) )
 
@@ -46,10 +44,21 @@ router.get('/admin/book/update/:book_id', ( request, response ) => {
 
 
 router.post('/book/update/:book_id', ( request, response ) => {
-  const { book_id, title, author, description } = request.params
 
-  Book.update( book_id, title, author, description )
-  .then( () => response.redirect( '/book/:book_id'))
+  const { book_id, title, description, author } = request.body
+  //
+  // if ( author ) {
+  //   Promise.one( Author.getIdByBookId( book_id ) )
+  //   .then( data => {
+  //     const author_id = data
+  //     Author.updateName( author_id, author )
+  //     console.log("ID and new NAME: ", author_id, author )
+  //   })
+  //   console.log("After author update");
+  // }
+
+  Book.update( book_id, title, description )
+  .then( () => response.redirect( '/book/' + book_id))
 })
 
 router.get('/admin', ( request, response ) => {
@@ -72,7 +81,7 @@ router.get( '/admin/author/create', ( request, response ) => {
 /* POST new author data. */
 router.post( '/author/create', ( request, response ) => {
    const { name, bio } = request.body
-console.log (name, bio)
+
    Author.create(  name, bio  )
     .then( author => {
       response.redirect( '/author/' + author.id )
